@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {AngularFireModule} from "@angular/fire/compat";
     BrowserModule,
     AppRoutingModule,
     AngularFireStorageModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [],

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize} from "rxjs/operators";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,13 @@ import {finalize} from "rxjs/operators";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = "cloudsSorage";
   selectedFile: any;
   fb: any;
   downloadURL: any;
-
+  form = new FormGroup({
+    name: new FormControl(''),
+    price: new FormControl('')
+  })
   constructor(private storage: AngularFireStorage) {
   }
 
@@ -44,5 +47,14 @@ export class AppComponent {
           console.log(url);
         }
       });
+  }
+
+  save() {
+    const obj = {
+      name: this.form.value.name,
+      price: this.form.value.price,
+      image: this.fb
+    }
+    console.log(obj)
   }
 }

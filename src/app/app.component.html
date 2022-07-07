@@ -6,4 +6,9 @@
          name="image"
          autocomplete="off"
   />
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <input type="text" formControlName="name">
+    <input type="text" formControlName="price">
+    <button>Add</button>
+  </form>
 </div>
