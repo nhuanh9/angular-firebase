@@ -10,7 +10,6 @@ import {
 } from '@angular/router';
 import {Injectable} from '@angular/core';
 import {UserToken} from "../model/user-token";
-import {UserService} from "../service/user.service";
 import {AuthenticationService} from "../service/authentication.service";
 
 @Injectable({
@@ -19,7 +18,7 @@ import {AuthenticationService} from "../service/authentication.service";
 export class AdminAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   currentUser: UserToken;
 
-  constructor(private router: Router, private userService: UserService, private authService: AuthenticationService) {
+  constructor(private router: Router, private authService: AuthenticationService) {
     this.authService.currentUser.subscribe(
       next => {
         this.currentUser = next;
