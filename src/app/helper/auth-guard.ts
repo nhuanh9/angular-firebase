@@ -5,7 +5,7 @@ import {AuthenticationService} from "../service/authentication.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
-  currentUser: UserToken;
+  currentUser: UserToken = {};
 
   constructor(
     private router: Router,

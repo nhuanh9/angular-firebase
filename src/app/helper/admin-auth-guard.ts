@@ -16,7 +16,7 @@ import {AuthenticationService} from "../service/authentication.service";
   providedIn: 'root'
 })
 export class AdminAuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  currentUser: UserToken;
+  currentUser: UserToken = {};
 
   constructor(private router: Router, private authService: AuthenticationService) {
     this.authService.currentUser.subscribe(
@@ -29,7 +29,12 @@ export class AdminAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let hasRoleAdmin = false;
     if (this.currentUser) {
-      const roleList = this.currentUser.roles;
+      let roleList = this.currentUser.roles;
+      if (roleList == undefined) {
+        roleList = [{
+
+        }]
+      }
       for (const role of roleList) {
         if (role.authority === 'ROLE_ADMIN') {
           hasRoleAdmin = true;
@@ -52,7 +57,12 @@ export class AdminAuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.currentUser) {
-      const roleList = this.currentUser.roles;
+      let roleList = this.currentUser.roles;
+      if (roleList == undefined) {
+        roleList = [{
+
+        }]
+      }
       let hasRoleAdmin = false;
       for (const role of roleList) {
         if (role.authority === 'ROLE_ADMIN') {
